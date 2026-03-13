@@ -389,10 +389,42 @@
         </div>
 
         <!-- Slide 3 -->
+        <!-- Slide: Hardware Requirements -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Hardware <span>Requirements</span></h2>
+                <span class="slide-number">03</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Processor:</strong> Minimum Intel Core i5 / AMD Ryzen 5 (Apple Silicon M1/M2 supported natively).</li>
+                    <li><strong>Memory (RAM):</strong> 8 GB minimum (16 GB recommended for seamless 3D rendering).</li>
+                    <li><strong>Storage:</strong> 50 GB of available disk space (primarily for handling medical datasets like LUNA-22).</li>
+                    <li><strong>Graphics (GPU):</strong> Dedicated GPU not strictly required. Intel Integrated Graphics or Apple minimum requirements are sufficient due to our optimized Lightweight U-Net 3D and WebGL implementations.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide: Software Requirements -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Software <span>Requirements</span></h2>
+                <span class="slide-number">04</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Operating System:</strong> Windows 10/11, macOS, or Linux (Ubuntu 20.04+).</li>
+                    <li><strong>Backend Environment:</strong> Python 3.8+ orchestrating the PyTorch and Flask frameworks.</li>
+                    <li><strong>Frontend Environment:</strong> Node.js (v18+) for building and serving the Next.js React application.</li>
+                    <li><strong>Web Browser:</strong> A modern browser that natively supports WebGL (Google Chrome, Firefox, Safari, or Microsoft Edge).</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Modules <span>Overview</span></h2>
-                <span class="slide-number">03</span>
+                <span class="slide-number">05</span>
             </div>
             <div class="content-grid">
                 <div class="glass-card">
@@ -414,7 +446,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Data Collection and <span>Preprocessing</span></h2>
-                <span class="slide-number">04</span>
+                <span class="slide-number">06</span>
             </div>
 <div class="content-body">
                 <ul>
@@ -435,7 +467,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Feasibility <span>Study</span></h2>
-                <span class="slide-number">05</span>
+                <span class="slide-number">07</span>
             </div>
 <div class="content-grid">
                 <div class="glass-card">
@@ -460,7 +492,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Process Model Used <span>Incremental Model</span></h2>
-                <span class="slide-number">06</span>
+                <span class="slide-number">08</span>
             </div>
             <div class="content-grid">
                 <div class="glass-card" style="grid-column: span 2;">
@@ -482,7 +514,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">System <span>Architecture</span></h2>
-                <span class="slide-number">07</span>
+                <span class="slide-number">09</span>
             </div>
 <div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
                     <p style="margin: 0; text-align: center;"><strong>The End-to-End System Flow:</strong> Illustrates
@@ -496,7 +528,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Activity <span>Diagram</span></h2>
-                <span class="slide-number">08</span>
+                <span class="slide-number">10</span>
             </div>
             <div class="content-body" style="font-size: 3.8rem;">
                 <p>An activity diagram mapping the workflow of detecting lung nodules using patch-based volumes.</p>
@@ -519,7 +551,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Sequence <span>Diagram</span></h2>
-                <span class="slide-number">09</span>
+                <span class="slide-number">11</span>
             </div>
 <div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
                     <p style="margin: 0; text-align: center;"><strong>The Model Mathematical Sequence:</strong>
@@ -534,7 +566,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">ER <span>Diagram</span></h2>
-                <span class="slide-number">10</span>
+                <span class="slide-number">12</span>
             </div>
             <div class="content-body" style="font-size: 4.0rem; justify-content: center; align-items: center; text-align: center;">
                 <p>The operational data entity relationships bridge the localized web-client instance to memory structures. Rather than a distinct database, temporary file structures are mapped into Tensor objects inside isolated memory contexts linked strictly to session IDs, ensuring complete patient data privacy simultaneously while calculating geometry variables.</p>
@@ -548,7 +580,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Development <span>Phase</span></h2>
-                <span class="slide-number">11</span>
+                <span class="slide-number">13</span>
             </div>
 <div class="content-grid">
                 <div>
@@ -571,7 +603,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">3D Convolutional <span>Model</span></h2>
-                <span class="slide-number">12</span>
+                <span class="slide-number">14</span>
             </div>
 <div class="content-body">
                 <ul>
@@ -592,7 +624,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">How 3D U-Net <span>Works?</span></h2>
-                <span class="slide-number">13</span>
+                <span class="slide-number">15</span>
             </div>
             <div class="content-body" style="font-size: 3.8rem;">
                 <p>The symmetric U-Net divides the 3D grid into distinct semantic contracting and expanding branches. It predicts voxel geometries, confidence probabilities, and margins. Depthwise separable convolutions divide the calculations into spatial channels, slashing hardware dependencies.</p>
@@ -604,7 +636,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Implementation of 3D U-Net in the <span>Project</span></h2>
-                <span class="slide-number">14</span>
+                <span class="slide-number">16</span>
             </div>
             <div class="content-body" style="font-size: 3.8rem;">
                 <p>This project implants the compressed 3D U-Net specifically for instantaneous inference localized entirely on consumer CPUs. The pipeline receives 64x64x32 patches representing complex anatomy from LUNA-22.</p>
@@ -616,7 +648,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Volumetric Visualization and <span>Analysis</span></h2>
-                <span class="slide-number">15</span>
+                <span class="slide-number">17</span>
             </div>
 <div class="content-grid">
                 <div>
@@ -641,7 +673,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Malignancy Classification and <span>Probability Logic</span></h2>
-                <span class="slide-number">16</span>
+                <span class="slide-number">18</span>
             </div>
 <div class="content-grid">
                 <div class="glass-card">
@@ -673,7 +705,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Performance Metrics in <span>Malignancy Detection</span></h2>
-                <span class="slide-number">17</span>
+                <span class="slide-number">19</span>
             </div>
 <div class="content-grid">
                 <div class="media-container">
@@ -696,7 +728,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Advantages of the <span>System</span></h2>
-                <span class="slide-number">18</span>
+                <span class="slide-number">20</span>
             </div>
 <div class="content-grid">
                 <div class="glass-card">
@@ -724,7 +756,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Applications of the <span>System</span></h2>
-                <span class="slide-number">19</span>
+                <span class="slide-number">21</span>
             </div>
             <div class="content-grid">
                 <div class="glass-card">
@@ -750,7 +782,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Expected <span>Results</span></h2>
-                <span class="slide-number">20</span>
+                <span class="slide-number">22</span>
             </div>
 <div class="content-grid">
                 <div class="glass-card">
@@ -779,7 +811,7 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title"> <span>Conclusion</span></h2>
-                <span class="slide-number">21</span>
+                <span class="slide-number">23</span>
             </div>
 <div class="content-body" style="padding: 100px; justify-content: center;">
                 <h3
