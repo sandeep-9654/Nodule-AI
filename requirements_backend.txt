@@ -1,0 +1,10 @@
+torch
+torchvision
+numpy
+flask
+flask-cors
+scipy
+nibabel
+scikit-learn
+scikit-image
+matplotlib

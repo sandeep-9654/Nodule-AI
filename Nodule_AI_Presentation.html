@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodule AI Presentation</title>
+    <style>
+        /* Base Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-color: #f8fafc;
+            /* Soft white/gray hospital aesthetic */
+            --text-main: #1e293b;
+            /* Deep charcoal */
+            --text-muted: #64748b;
+            --accent-green: #4CAF50;
+            /* Clinical Light Green */
+            --accent-green-light: #e8f5e9;
+            --accent-red: #ff3333;
+            /* Malignant neon red */
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #e2e8f0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Presentation Container */
+        .presentation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Individual Slide */
+        .slide {
+            width: 3840px;
+            /* 21:9 fixed ratio for scaling */
+            height: 2210px;
+            background: #ffffff;
+            position: relative;
+            box-sizing: border-box;
+            padding: 210px 180px;
+            margin-bottom: 9rem;
+            box-shadow: 0 60px 210px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Scale down for web viewing preview */
+            transform-origin: top center;
+            zoom: 0.28;
+        }
+
+        /* Print Media Queries - CRITICAL FOR PDF EXPORT */
+        @media print {
+            @page {
+                size: 3840px 2210px;
+                /* Force exactly these dimensions to avoid scaling issues */
+                margin: 0;
+            }
+
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .presentation {
+                padding: 0;
+                display: block;
+            }
+
+            .slide {
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+                width: 3840px;
+                height: 2210px;
+                zoom: 1;
+                /* Reset web preview scaling */
+                page-break-after: always;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                transform: none;
+            }
+
+            .slide:last-child {
+                page-break-after: auto;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* Fallbacks for when Chrome strips 'Background graphics' */
+            .glass-card {
+                background: #f8fafc !important;
+                border: 6px solid #4CAF50 !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+            }
+
+            .title-slide {
+                background: #e8f5e9 !important;
+            }
+
+            .media-container {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+
+            .content-body,
+            .content-grid>div:not(.media-container):not(.glass-card) {
+                border: 6px solid #4CAF50 !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+            }
+        }
+
+        /* Slide Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 8px solid var(--accent-green-light);
+            padding-bottom: 35px;
+            margin-bottom: 70px;
+        }
+
+        .slide-title {
+            font-size: 7.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .slide-title span {
+            color: var(--accent-green);
+        }
+
+        .slide-number {
+            font-size: 3.8rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            opacity: 0.6;
+        }
+
+        /* Slide Content Areas */
+        .content-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            font-size: 4.4rem;
+            line-height: 1.5;
+            min-height: 0;
+            min-width: 0;
+            background: #ffffff;
+            border: 6px solid rgba(76, 215, 80, 0.4);
+            border-radius: 40px;
+            padding: 60px 80px;
+            overflow: hidden;
+            /* Ensures text does not cross border */
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 150px;
+            flex: 1;
+            font-size: 4.2rem;
+            /* Adjusted to 4.2rem per user feedback */
+            line-height: 1.5;
+            min-height: 0;
+            height: 100%;
+        }
+
+        .content-grid>div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-grid>div:not(.media-container):not(.glass-card) {
+            background: #ffffff;
+            border: 6px solid rgba(76, 215, 80, 0.4);
+            border-radius: 40px;
+            padding: 40px 60px;
+            /* Reduced to save vertical space */
+            overflow: hidden;
+            /* Ensures text does not cross border */
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.02);
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 80px;
+            padding-right: 40px;
+            /* Buffer right border */
+        }
+
+        li {
+            margin-bottom: 40px;
+            position: relative;
+            word-wrap: break-word;
+            /* Ensure long words don't overflow */
+        }
+
+        .content-grid li {
+            margin-bottom: 25px;
+            /* Reduced constraint for 50%-width text grids */
+        }
+
+        li::marker {
+            color: var(--accent-green);
+            font-size: 5.5rem;
+        }
+
+        .content-grid li::marker {
+            font-size: 4.5rem;
+        }
+
+        /* Emphasized highlight for malignant notes */
+        .highlight-danger {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .highlight-safe {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Screenshots / UI Media */
+        .media-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            max-height: 1200px;
+            /* Constrain max height explicitly for 4K base */
+            width: 100%;
+            /* Take up the full column */
+            background: transparent;
+            border-radius: 48px;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .media-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 30px;
+            object-fit: contain;
+            background: transparent;
+            box-shadow: 0 21px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: linear-gradient(215deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.7) 130%);
+            border: 3px solid rgba(76, 215, 80, 0.3);
+            border-radius: 40px;
+            padding: 55px;
+            margin-bottom: 40px;
+            box-shadow: 0 21px 50px rgba(0, 0, 0, 0.03);
+            backdrop-filter: blur(21px);
+        }
+
+        .glass-card h3 {
+            margin-top: 0;
+            color: var(--accent-green);
+            font-size: 5.2rem;
+            margin-bottom: 25px;
+        }
+
+        .glass-card p {
+            font-size: 3.8rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* Title Slide Custom */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #ffffff 0%, var(--accent-green-light) 210%);
+        }
+
+        .title-slide h1 {
+            font-size: 21.5rem;
+            color: var(--accent-green);
+            margin-bottom: 35px;
+            letter-spacing: -4px;
+        }
+
+        .title-slide h2 {
+            font-size: 6.4rem;
+            color: var(--text-main);
+            margin-bottom: 90px;
+            font-weight: 300;
+        }
+
+        .title-slide .team-info {
+            font-size: 4.2rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            background: #fff;
+            padding: 60px 210px;
+            border-radius: 40px;
+            box-shadow: 0 35px 70px rgba(76, 215, 80, 0.1);
+            border: 3px solid var(--border-color);
+        }
+
+        /* Print formatting overlay instructions */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--text-main);
+            color: white;
+            padding: 30px 60px;
+            font-size: 32px;
+            border-radius: 210px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 21px 40px rgba(0, 0, 0, 0.2);
+            border: none;
+            z-index: 210;
+        }
+
+        .print-btn:hover {
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="print-btn no-print" onclick="window.print()">Export to PDF 🖨️</button>
+
+    <div class="presentation">
+
+        <!-- Slide 1 -->
+        <div class="slide title-slide">
+            <h1>Nodule AI</h1>
+            <h2>Volumetric CT Scan Analysis for Pulmonary Nodule Detection<br>and Malignancy Classification Using 3D CNN
+                Architectures</h2>
+            <div class="team-info">
+                <strong>Guide:</strong> J. Ravindra Babu, Assistant Professor, CSE-Data Science<br><br>
+                <strong>Team-14:</strong><br>
+                B. Sandeep Raghavendra (22JR1A4439)<br>
+                A. Jaswanth Kumar (22JR1A4434)<br>
+                G. Vignan (22JR1A4448)<br>
+                J. Ganesh (22JR1A4452)<br>
+                K. Madhu (22JR1A4457)
+            </div>
+        </div>
+
+        <!-- Slide 2: Abstract -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Project <span>Abstract</span></h2>
+                <span class="slide-number">02</span>
+            </div>
+            <div class="content-body" style="font-size: 3.8rem; line-height: 1.6;">
+                <p>This project introduces an end-to-end web-based application designed for the automated detection and
+                    malignancy classification of pulmonary lung nodules from 3D CT scans. Driven by a highly optimized,
+                    CPU-efficient <strong>Lightweight 3D U-Net Architecture</strong>, it addresses the massive
+                    computational bottlenecks of traditional volumetric analysis while completely eliminating the need
+                    for expensive hospital GPUs.</p>
+                <p>By integrating a Next.js responsive frontend with a PyTorch backend and real-time WebGL rendering,
+                    the system empowers clinicians to instantly visualize critical spatial relationships in 3D,
+                    accelerating life-saving diagnostic workflows.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The <span>Global Challenge</span></h2>
+                <span class="slide-number">03</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>The Global Challenge:</strong> Lung cancer causes millions of deaths annually; early
+                        detection of pulmonary nodules is the absolute key to survival.</li>
+                    <li><strong>Current Bottleneck:</strong> Manual inspection of massive 3D CT scans slice-by-slice is
+                        slow, highly repetitive, and inherently prone to human fatigue.</li>
+                    <li><strong>Diagnostic Delays:</strong> Overwhelmed radiology departments face severe backlogs,
+                        meaning critical tumors can grow before a scan is ever reviewed.</li>
+                    <li><strong>High Inter-Observer Variability:</strong> Different doctors often interpret complex,
+                        irregular borders differently, leading to inconsistent biopsy decisions.</li>
+                    <li><strong>Our Solution:</strong> An automated, deeply-integrated AI diagnostic assistant for
+                        real-time, highly accurate nodule detection and classification directly inside a web browser.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The Obstacles in <span>Medical AI</span></h2>
+                <span class="slide-number">04</span>
+            </div>
+            <div class="content-grid">
+                <div class="glass-card">
+                    <h3>Model Bias</h3>
+                    <p>Extreme class imbalance in medical data (millions of healthy voxels vs. few tumor voxels) causes
+                        severe false-benign predictions.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Hardware Exhaustion</h3>
+                    <p>Full 3D isotropic volumes crash standard clinical workstations. Heavy convolutions demand
+                        non-existent local VRAM.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Data Overhead</h3>
+                    <p>Legacy datasets like LUNA-21 require massive, brittle local preprocessing pipelines just to
+                        extract regions of interest.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>The "Black Box"</h3>
+                    <p>Traditional AI outputs a single number and lacks visually intuitive, explainable interfaces that
+                        a doctor can actually trust.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Why Current Methods <span>Fall Short</span></h2>
+                <span class="slide-number">05</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Traditional CAD Systems:</strong> Rely completely on hand-crafted features (gradients,
+                        shapes). This leads to brittle generalization on new scanner data and high false-positive biopsy
+                        rates.</li>
+                    <li><strong>Heavyweight 3D CNNs (V-Net, Standard 3D U-Net):</strong> Produce great metrics but
+                        demand 24GB+ VRAM enterprise GPUs, making local hospital deployment financially and technically
+                        unscalable.</li>
+                    <li><strong>Manual Radiology Review:</strong> 2D planar viewing on traditional software misses the
+                        holistic 3D contextual relationships and margins of the tumor entirely.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Slide Extra UML 1 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">System <span>Architecture</span></h2>
+                <span class="slide-number">06</span>
+            </div>
+            <div style="display: flex; flex-direction: column; height: 100%; gap: 40px;">
+                <div class="media-container"
+                    style="flex: 1; max-height: 85%; width: 100%; border: 6px dashed var(--accent-green); padding: 40px; background: white;">
+                    <img src="Project SS/UML-1.png" alt="Architecture UML Diagram 1"
+                        style="object-fit: contain; width: 100%; height: 100%; box-shadow: none; background: transparent;">
+                </div>
+                <div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
+                    <p style="margin: 0; text-align: center;"><strong>The End-to-End System Flow:</strong> Illustrates
+                        the complete data lifecycle—from raw volumetric 3D file ingestion by the Next.js client, routed
+                        via the stateless REST gateway, and evaluated by the Lightning PyTorch backend to output
+                        real-time clinical probability metrics directly to the browser UI.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">A Paradigm Shift in <span>Diagnostic AI</span></h2>
+                <span class="slide-number">07</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Strategic Dataset Migration:</strong> Transitioned the entire pipeline to the LUNA-22
+                        (ISMI) 3D Patches dataset. Pre-extracted regions completely eliminate class imbalance.</li>
+                    <li><strong>Lightweight Architecture:</strong> Built a custom Lightweight U-Net 3D specifically
+                        tailored for CPU inference.</li>
+                    <li><strong>Drastic Compression:</strong> Total parameter count systematically reduced to ~215K
+                        (under 1 MB file size).</li>
+                    <li><strong>Full-Stack Deployment:</strong> A Next.js responsive frontend married to a high-speed
+                        Flask PyTorch backend.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Slide Extra -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Algorithm <span>Pipeline</span></h2>
+                <span class="slide-number">08</span>
+            </div>
+            <div style="display: flex; flex-direction: column; height: 100%; gap: 40px;">
+                <div class="media-container"
+                    style="flex: 1; max-height: 85%; width: 100%; border: 6px dashed var(--accent-green); padding: 40px; background: white;">
+                    <img src="Project SS/UML-2.png" alt="Architecture UML Diagram 2"
+                        style="object-fit: contain; width: 100%; height: 100%; box-shadow: none;">
+                </div>
+                <div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
+                    <p style="margin: 0; text-align: center;"><strong>The Model Mathematical Sequence:</strong>
+                        Demonstrates the optimized volumetric pathway where localized regions undergo depthwise
+                        separable convolutions. The symmetric 3D U-Net's contracting and expanding structures
+                        aggressively preserve spatial detail, generating both the discrete spatial segmentation mask and
+                        the malignancy classification output simultaneously.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Engineering for <span>Clinical Excellence</span></h2>
+                <span class="slide-number">09</span>
+            </div>
+            <div class="content-grid">
+                <div class="glass-card">
+                    <h3>Speed & Accuracy</h3>
+                    <p>Millisecond inference for classification. Zero waiting time for the physician.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Edge-Compute Ready</h3>
+                    <p>Runs seamlessly on standard consumer CPUs. No cloud GPU API fees required for inference.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Visual Authenticity</h3>
+                    <p>Features a custom-engineered CT-authentic interactive 3D WebGL interface directly rendering in
+                        the browser.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Actionable Insights</h3>
+                    <p>Generates rich clinical text detailing estimated dimensions, margin texture, and official
+                        recommended actions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">End-to-End <span>Technical Stack</span></h2>
+                <span class="slide-number">10</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Client UI (Next.js & Tailwind CSS):</strong> Delivers a highly responsive, modern,
+                        dark-mode/hospital-light hybrid experience with zero layout shift.</li>
+                    <li><strong>3D WebGL Engine (Three.js & React-Three-Fiber):</strong> Procedural rendering and
+                        dynamic lighting algorithms run securely in the client's browser.</li>
+                    <li><strong>API Gateway (Flask):</strong> A stateless REST API securely handling voxel intensity
+                        normalization preprocessing and extremely fast inference routing.</li>
+                    <li><strong>Deep Learning Engine (PyTorch):</strong> Executes the rapid CPU/GPU forward-passes on
+                        the optimized graph.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The <span>Lightweight U-Net 3D</span> Model</h2>
+                <span class="slide-number">11</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>The Foundation:</strong> The U-Net architecture perfectly concatenates deep semantic
+                        (meaning) features with shallow spatial (location) features via skip connections.</li>
+                    <li><strong>The Weight Problem:</strong> Standard 3D convolutions require a catastrophic amount of
+                        FLOPs, completely halting edge devices.</li>
+                    <li><strong>Our Innovation:</strong> Implemented <strong>Depthwise Separable 3D
+                            Convolutions</strong>—splitting the calculation into spatial filtering and 1x1x1 pointwise
+                        feature combination.</li>
+                    <li><strong>The Result:</strong> Semantic volumetric segmentation achieved with only <strong>154,812
+                            parameters</strong>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Advanced <span>Training Dynamics</span></h2>
+                <span class="slide-number">12</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Loss Function:</strong> Implemented a Combined Loss mechanism summing BCEWithLogitsLoss
+                        + Soft Dice Loss to suppress false positives dynamically.</li>
+                    <li><strong>Optimizer:</strong> AdamW combined with a Cosine Annealing Learning Rate Scheduler for
+                        smooth convergence over 50 epochs.</li>
+                    <li><strong>The Bias Trick:</strong> The final classification layer bias was initialized heavily
+                        negative (-5.0) to prevent early training explosive gradients caused by benign-heavy data.</li>
+                    <li><strong>Hardware Acceleration:</strong> Utilized Automated Mixed Precision (AMP - fp16) on
+                        Kaggle Cloud GPUs to halve memory consumption during training.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The <span>Clinical Dashboard</span> Experience</h2>
+                <span class="slide-number">13</span>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <ul>
+                        <li><strong>Design Philosophy:</strong> A beautifully clean hospital-aesthetic perfectly
+                            tailored for radiological review stations to minimize eye strain.</li>
+                        <li><strong>Layout:</strong> Highly responsive width utilizing dynamic content panes and soft
+                            glassmorphism borders.</li>
+                        <li><strong>Overview Hub:</strong> Showcases high-level system status, inference engine
+                            connection pulses, and immediate quick-actions.</li>
+                    </ul>
+                </div>
+                <div class="media-container">
+                    <img src="Project SS/1.png" alt="Clinical Dashboard Screenshot">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Seamless <span>Navigation System</span></h2>
+                <span class="slide-number">14</span>
+            </div>
+            <div class="content-grid">
+                <div class="media-container">
+                    <img src="Project SS/2.png" alt="Sidebar Navigation Screenshot">
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Persistent Sidebar:</strong> Instant switching between Overview, Analyze,
+                            Performance, and Info views.</li>
+                        <li><strong>Fluid Transitions:</strong> Specialized Tailwind <code>transition-colors</code>
+                            algorithms strictly prevent layout UI flashing.</li>
+                        <li><strong>Prefetching:</strong> Next.js inherently enables instantaneous loading of all
+                            sub-routes.</li>
+                        <li><strong>Real-Time Status:</strong> Incorporates a live pulsing "System Online" intelligence
+                            indicator.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The <span>Analyze Interface</span></h2>
+                <span class="slide-number">15</span>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <ul>
+                        <li><strong>Interactive Dropzone:</strong> Wide-target drag-and-drop support strictly validating
+                            for raw 3D volumetric `.npy` patches.</li>
+                        <li><strong>Processing Feedback:</strong> Engages indeterminate progress bars to assure the user
+                            during the PyTorch inference.</li>
+                        <li><strong>The Analytics Panel:</strong> Right-hand column populates instantly with probability
+                            scores and AI-reasoned clinical descriptions.</li>
+                    </ul>
+                </div>
+                <div class="media-container">
+                    <img src="Project SS/3.png" alt="Analyze File Dropzone">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">WebGL Engineering <span>(3D Core)</span></h2>
+                <span class="slide-number">16</span>
+            </div>
+            <div class="content-grid">
+                <div class="media-container">
+                    <img src="Project SS/4.png" alt="WebGL Engineering Model">
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>The Engine:</strong> Leverages React-Three-Fiber to draw high-performance graphical
+                            pipelines directly onto an HTML Canvas using the GPU.</li>
+                        <li><strong>Procedural Geometry:</strong> Parametric mathematical functions generate dynamic,
+                            organic lung lobes on the fly without loading heavy initial 3D files.</li>
+                        <li><strong>Anatomical Accuracy:</strong> Precisely calculates a tapered apex, flat wide base,
+                            and inner mediastinal concavity.</li>
+                        <li><strong>Material Rendering:</strong> Mimics translucent soft human tissue via complex
+                            metallic/roughness node logic.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">3D Visualization <span>Experience</span></h2>
+                <span class="slide-number">17</span>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <ul>
+                        <li><strong>CT Aesthetic:</strong> Uses a 75% opaque ghostly gray-white parenchyma to perfectly
+                            resemble real clinical imaging.</li>
+                        <li><strong>Malignant Cases:</strong> In cases >50%, an intensely <span
+                                class="highlight-danger">glowing neon red</span> spherical mesh (#ff3333) emits internal
+                            point-light tracking.</li>
+                        <li><strong>Benign Cases:</strong> Rendered as <span class="highlight-safe">clean, healthy
+                                gray</span> lung geometry with no visual anomalies distracting the physician.</li>
+                        <li><strong>Interaction:</strong> Free 360-degree OrbitControls with locked zoom bounds.</li>
+                    </ul>
+                </div>
+                <div class="media-container">
+                    <img src="Project SS/5.png" alt="Red Malignant 3D Nodule Render">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">System <span>Performance Dashboard</span></h2>
+                <span class="slide-number">18</span>
+            </div>
+            <div class="content-grid">
+                <div class="media-container">
+                    <img src="Project SS/6.png" alt="Performance Metrics Analytics">
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Live Metrics:</strong> Clean CSS data-grid layouts flawlessly showcasing F1-Score,
+                            Overall Accuracy, Precision, and Recall variables.</li>
+                        <li><strong>Statistical Breakdown:</strong> Detailed numerical Confusion Matrix explicitly
+                            highlighting the structurally low false-negative rate required for oncology.</li>
+                        <li><strong>Hardware Efficiency:</strong> Visually reinforcing the ultra-low compute overhead
+                            (~0.6MB parameter weight envelope).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Advanced <span>Model Analytics</span></h2>
+                <span class="slide-number">19</span>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <ul>
+                        <li><strong>Deep Diving:</strong> Secondary dashboard panes allow physicians to view precise
+                            thresholds.</li>
+                        <li><strong>Visual Confirmations:</strong> Displays granular loss curves and validation matrices
+                            right inside the app.</li>
+                        <li><strong>Transparent Metrics:</strong> Openly provides the dataset testing conditions.</li>
+                    </ul>
+                </div>
+                <div class="media-container">
+                    <img src="Project SS/8.png" alt="Advanced Model Analytics">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Project <span>Transparency & Information</span></h2>
+                <span class="slide-number">20</span>
+            </div>
+            <div class="content-grid">
+                <div class="media-container">
+                    <img src="Project SS/9.png" alt="Information Documentation Page">
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Documentation Hub:</strong> An integrated, elegant Markdown-based Info page
+                            providing in-app access to architecture structural shifts.</li>
+                        <li><strong>Algorithmic Explainability:</strong> Directly educates curious clinical users on why
+                            Depthwise Separable layers and Bias Tricks were utilized.</li>
+                        <li><strong>Team 14 Manifest:</strong> Official project origins, academic affiliations, and
+                            version control status transparently listed for audit.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The PyTorch + Flask <span>Gateway</span></h2>
+                <span class="slide-number">21</span>
+            </div>
+            <div class="content-body">
+                <ul>
+                    <li><strong>Robust Preprocessing (`preprocess_npy`):</strong> Automates strict voxel intensity
+                        normalization to map all raw Hounsfield units to the absolute [0, 1] range expected by the AI.
+                    </li>
+                    <li><strong>Bridging the Stack:</strong> A lightning-fast, stateless Flask app serves as the exact
+                        pipeline connecting the React client uploads to the deep PyTorch mathematics.</li>
+                    <li><strong>Lightning Inference:</strong> Runs a `torch.no_grad()` forward pass entirely localized
+                        on the core CPU, completing in extreme milliseconds for instantaneous UI injection.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">AI-Assisted, <span>Not Replaced</span></h2>
+                <span class="slide-number">22</span>
+            </div>
+            <div class="content-grid">
+                <div class="glass-card">
+                    <h3 class="highlight-danger">> 75% Probability</h3>
+                    <p>System automatically warns of irregular spiculated margins and officially recommends immediate
+                        PET-CT and biopsy correlation.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>50-75% Probability</h3>
+                    <p>Notes indeterminate growth characteristics. System recommends cautious short-interval (3-6 month)
+                        follow-up CT scans based on Fleischner criteria.</p>
+                </div>
+                <div class="glass-card">
+                    <h3 class="highlight-safe">
+                        < 25% Probability</h3>
+                            <p>Identifies smooth density. Recommends standard routine follow-up with extremely low
+                                malignancy risk.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>The Ultimate Goal</h3>
+                    <p>Seamlessly translating cold, raw deep learning percentages into proper, actionable
+                        <strong>radiological vernacular</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Ready for the <span>Real World</span></h2>
+                <span class="slide-number">23</span>
+            </div>
+            <div class="content-grid">
+                <div class="glass-card">
+                    <h3>Technical Feasibility</h3>
+                    <p>Leverages bullet-proof modern open-source stacks. Crucially, the ultra-light graph guarantees it
+                        will run effortlessly on aging hospital IT equipment.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Operational Feasibility</h3>
+                    <p>Deploys as a standard secure web URL. Requires precisely zero local software, plugins, or driver
+                        installations by the clinical staff.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Economic Feasibility</h3>
+                    <p>Model training was entirely subsidized by free Kaggle Cloud instances. Local CPU inference costs
+                        $0. Resulting in massive long-term hospital workflow savings.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Impact and <span>Future Scope</span></h2>
+                <span class="slide-number">24</span>
+            </div>
+            <div class="content-grid">
+                <div class="glass-card">
+                    <h3>Faster Triaging</h3>
+                    <p>Yields an estimated 30-40% faster turnaround time (TAT) on routine scanning queues.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Queue Priority</h3>
+                    <p>Automatically flags and pushes Highly Malignant >90% scans to the immediate top of the
+                        radiologist's review list.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Second Reader Systems</h3>
+                    <p>Silent "Concurrent Read" AI catches fatigue-induced human errors, dropping false-negative rates
+                        dramatically.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Medical Education</h3>
+                    <p>Serves as an exceptional 3D spatial visual teaching tool for oncoming oncology and radiology
+                        students.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Final -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">The Future of <span>Visual Diagnostics</span></h2>
+                <span class="slide-number">25</span>
+            </div>
+            <div class="content-body" style="padding: 100px; justify-content: center;">
+                <h3
+                    style="font-size: 6rem; color: var(--accent-green); margin-bottom: 80px; text-align: center; margin-top: 0;">
+                    Nodule AI Project Conclusion</h3>
+                <ul style="padding-left: 0; list-style-position: inside; max-width: 90%; margin: 0 auto;">
+                    <li style="margin-bottom: 60px;"><strong>Bridging the Gap:</strong> Successfully transitioned from
+                        mathematically intense research algorithms to a practical, elegant clinical deployment.</li>
+                    <li style="margin-bottom: 60px;"><strong>Overcoming Obstacles:</strong> Obliterated traditional
+                        graphical hardware limitations via the deeply compressed <strong>Lightweight U-Net 3D</strong>
+                        architecture.</li>
+                    <li style="margin-bottom: 60px;"><strong>The Final Product:</strong> Delivered a secure,
+                        zero-installation frontend application equipped with a breathtaking clinical 3D volumetric
+                        visualizer.</li>
+                </ul>
+                <div
+                    style="text-align: center; margin-top: 100px; font-weight: 700; color: var(--accent-green); font-size: 7rem; letter-spacing: -2px;">
+                    Thank You. Questions?
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

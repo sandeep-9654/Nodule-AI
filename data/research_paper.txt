@@ -1,0 +1,486 @@
+V olumetric CT Scan Analysis for Pulmonary
+Nodule Detection and Malignancy Classification
+Using 3D CNN Architectures
+J. Ravindra Babu1, B. Sandeep Raghavendra2, A. Jaswanth kumar3, G. Vignan4, J. Ganesh5, K. Madhu6
+1Assistant Professor, Dept. of CSE–Data Science
+KKR & KSR INSTITUTE OF TECHNOLOGY AND SCIENCES
+GUNTUR
+Email: jravindra7@gmail.com
+2,3,4,5,6B. Tech Student, Dept. of CSE–Data Science
+KKR & KSR INSTITUTE OF TECHNOLOGY AND SCIENCES
+GUNTUR
+Emails: bsandeepr54@gmail.com, jkamaralpudi@gmail.com, vignangera07@gmail.com, ganeshjakka665@gmail.com,
+kattamadhu718@gmail.com
+Abstract—Lung cancer is a reason why a lot of people die
+from cancer all over the world [1]. If doctors can find lung
+cancer early then people are more likely to survive lung cancer
+[1]. Doctors usually look at pictures from a CT scan. They use
+it to check for lung cancer [2]. The pictures, from the CT scan
+help doctors see what is going on inside the body. They can then
+check these pictures for lung cancer [2]. People also use a type
+of computer program called a 2D CNN (Convolutional Neural
+Network) to help them find lung cancer. They use this 2D CNN
+to look at pictures and find lung cancer. The 2D CNN is very
+good at helping people find lung cancer. This project is about
+creating a computer program that can find and sort out lung
+cells these lung cells are called nodules. The program uses 3D
+Convolutional Neural Networks (or) 3D CNNs to do this [1]. This
+project is about looking at the lung scan all at once instead of
+looking at one part of the lung scan at a time. The program looks
+at the lung scan, which is made up of lung nodules and it tries
+to find all of the lung nodules, in the lung scan. The thing about
+lung scans is that they can be really hard to read [1] [2]. That
+is where 3D CNNs come in. They help the program look at the
+lung scan. Find the pulmonary nodules. 3D CNNs look at things
+in three dimensions. They use units of information called voxels
+[1]. Voxels help get a picture of what the bad cells look like.
+The 3D approach is useful because it helps us see the shape and
+texture of the cells. It also shows us where the cells are located in
+the lung. This project uses 3D CNNs to make all of this happen.
+The 3D CNNs are what make it possible to get a better look at
+the lung scan and find the pulmonary nodules. The 3D CNNs
+are really good at helping us understand the cells in the lung.
+The 3D CNNs are very helpful when it comes to the cells, in the
+lung [1].
+The way we do things has three parts:
+1. Preprocessing: Normalizing and segmenting lung volumes
+from the LIDC-IDRI / LUNA16 dataset to focus on the area
+of interest (ROI) [6]. 2. Nodule Detection: Using a 3D Region
+Proposal Network (RPN) or 3D U-Net to find potential nodule
+locations [1]. 3. Classification: Implementing a 3D CNN classifier
+(e.g., 3D ResNet or C3D) to label detected nodules as benign or
+malignant based on malignancy probability scores [2].
+The main goal of this project is to create a computer system
+that can help doctors diagnose problems [1]. This computer sys-tem is called a computer-aided diagnosis system. The computer-
+aided diagnosis system should be better than looking at pictures
+of the body one slice at a time.
+Index Terms—Lung Cancer, 3D CNN, Pulmonary Nodules,
+Volumetric Analysis, Deep Learning, LUNA16, Medical Imaging.
+I. INTRODUCTION
+Health is the one of the important aspect in the life. Now a
+days many health problems are taking place in the human
+body due to various causes [14]. One of the major health
+problem is in the lungs & heart [14]. As the heart plays the
+main function in the human body, the lungs are very important
+for the supporting of the heart [1]. If some problem is occurs
+in the lungs then it may cause huge lose to the human [1].
+In order to overcome the huge lose, modern technology came
+with a terrific solution known as “CT scan”
+The Computed Tomography scan which is shortly known
+as CT scan is a medical imaging technique used to get
+the detailed internal images of the body. This is one of
+the advanced technique in the medical field used to treat
+the patients [1]. The person who perform the CT scan are
+generally known as radiographers. The CT scan is done for
+the several parts of the body like head, chest, abdomen, bones.
+The CT scan is done to get a detailed information of bones,
+organs, and soft tissues in the form of images to diagnose
+injuries, diseases, conditions and to guide procedures like
+surgery [1] [14]. This is fast and effective for the emergencies
+and for the monitoring treatment progress.
+The reasons & purposes for doing the CT scan are tumors,
+cancers, brain issues, abdominal issues, chest problems, bone
+& spine problems, vascular conditions, and many more [1]
+[14]. Before the invention of the CT scan is it highly impos-
+sible to detect the problem occurred. With the help of the CT
+scan we can breakdown the difficulties of the detection of the
+problem and the process of the curing the problem.
+Here by the usage the CT scan the medical field overcomes
+the major problems faced in the pulmonary [1].
+II. PROBLEMSTATEMENT
+A 2D CT scan system usually works with pictures from
+computed tomography scans. The 2D CT scan system is not
+always accurate. It has trouble reducing artifacts. The 2D CT
+scan system also has a time putting all the pictures together
+for a full volumetric analysis.
+In imaging like when doctors look for pulmonary nodules
+the main issue is looking at 2D slices to find and classify
+potential malignancies. The doctors have to deal with noise,
+low contrast and variations in quality. This makes it hard to
+detect problems on without using advanced processing, for the
+2D CT scan system.
+A. Key Challenges
+When we look at 2D slices it is hard to see things because
+we do not have a good sense of depth. This makes it tough
+to tell overlapping structures or small nodules apart from the
+tissue that’s, around them. We have trouble seeing the nodules
+because they are surrounded by tissue that looks similar. The
+overlapping structures are also hard to distinguish in 2D slices.
+Things that are not supposed to be in the image like artifacts
+from beam hardening or when the patient moves or when
+the system has errors make the image not look as good as
+it should. This means that doctors cannot rely on the image to
+make a diagnosis. Artifacts from beam hardening, motion or
+system errors are a problem because they reduce the quality
+of the image and that is not good, for diagnostic reliability of
+the image.
+Doing things by hand takes a lot of time. People can make
+mistakes. So we need to use computers to do the work for
+interpretation because manual interpretation is not good for
+looking at a lot of things. This way manual interpretation can
+be done faster. With fewer errors, for manual interpretation.
+III. LITERATUREREVIEW
+People who study literature about using computers to look at
+volumetric CT scans for finding lung problems are saying that
+things are different now [2] [3]. The fact that 3D computers are
+able to help us understand lung problems. This 3D computers
+explains lung problems better than 2D computers. So 3D
+computers are very helpful when it comes to understanding
+lung problems.
+At first people were trying to teach computers what to
+look for. They were not very good at it. After 2015 people
+started using sets of data, like LIDC-IDRI and LUNA16 to
+teach computers to look at volumetric CT scans and find lung
+problems on their own [4]. Now these computers can find most
+of the lung problems than 90 percent of the time which is very
+good [2] [3].
+Lung problems are found by computers using volumetric
+CT scans. This is a big improvement. These studies tell us
+that we need to use computer programs like 3D CNNs to find
+problems with the lungs.We have to build these 3D CNNs so that we can use them
+to find problems with the lungs [1] [15].
+We need to use 3D CNNs to help doctors find problems,
+with the lungs. When we create the 3D CNNs we have to
+consider a lot of things. This is how we can find things like
+nodules. The 3D CNNs are useful because they help us avoid
+saying that something is bad when the 3D CNNs know it is
+really fine [1] [5]. We use the 3D CNNs to make sure we get
+it right. The 3D CNNs are important for this.
+The 3D CNNs are really good for this type of work. We
+should use the 3D CNNs to look at things from angles. This
+will help us find the nodules [1].
+A. Early Developments (Pre-2018)
+The first time that the 3D CNN was used was for things
+like the work that Setio et al. Did, in LUNA16 [4].
+They used the CNN to find things in the 3D pictures.
+They used a combination of 2D pictures and 3D pictures to
+get rid of positives by looking at the 3D CNN results from
+many different angles [4]. This way they could see the 3D
+CNN results from lots of sides. The 3D CNN results were
+looked, at carefully to make sure they were correct. They used
+the 2D pictures and the 3D pictures together to check the 3D
+CNN results.
+This method was really good, for the CNN and the 3D CNN
+got a very good score of 0.923 on LUNA16 when they used
+the 3D CNN [4]. The 3D CNN did a job and that is why the
+3D CNN got such a good score.
+Fig. 1. Visualization of 3D CNN architecture for pulmonary nodule detection
+Dou and his team decided to try something with 3D CNN.
+They looked at parts of pictures like tiny sections that are
+40x40x26 [10]. He and his team used ways to look at these
+tiny sections of pictures. This really helped him. His team
+make their 3D CNN much better at finding things in pictures
+[10]. Dou and his team were able to get a score of 0.827 with
+their CNN. He and his team were happy, with what they found
+out about 3D CNN. I think the new ways of using 3D CNN
+are really good. 3D CNN is better than the ways that did not
+use deep learning [10].
+B. Key Architectures And Advances
+3D ResNet, U-Net variants, and Inception-based models
+dominate, with innovations like Res2SENet for multi-scale
+features (sensitivity 0.923 on LUNA16) [8] and attention
+mechanisms boosting AUC to 0.93 [8]. Multi-task learning
+(e.g., PN-SAMP by Wu et al.) jointly predicts segmentation,
+attributes, and malignancy (97.58% accuracy on LIDC-IDRI).
+Ensembles like DeepLung [5] integrate detection and classifi-
+cation via 3D dual-path networks [5].
+IV. PROPOSEDSYSTEMS
+The research paper presents an implementation of a
+computer-aided diagnosis (CAD) system to detect and clas-
+sify pulmonary nodules using volumetric CT scans from the
+LIDC-IDRI and LUNA16 dataset. The approach advances 2D
+methods by utilizing 3D CNNs to provide a more complete
+description of nodule characteristics, such as shape, spatial
+context, and texture, based on voxels.
+Three stages comprise the system processing: 1.Preprocess-
+ing - The preprocessing stage normalizes the CT image data
+into a common range of Hounsfield Units (-800 to 200 HU),
+clips the voxel values between -4 and 1, and segments the lung
+volume into regions of interest (ROIs) around each nodule
+(e.g., a voxel cube with dimensions of either 32 × 32 × 16 or
+16 × 16 × 16 that has a 20% padding) based upon the center
+line of the nodule. Any nodule measurement that is grossly
+over 3 mm will be automatically separated into its ROI; if
+the measurement is unclear then a KNN labelling method will
+be applied. 2.Nodule Detection - The nodule detection uses
+either a 3D Fully Convolutional Network (FCN), Multi-Scale
+3D CNN (e.g., patches of 20 × 20 × 6 / 30 × 30 × 10 / 40 ×
+40 × 26), or a 3D Region Proposal Network( RPN)/3D U-Net
+by generating candidate ROIs for available detected nodules
+with the aim of reducing the number of false positive results.
+3.Classification - In classifying nodules as benign/malignant,
+3D CNN Classifiers (e.g. 3D ResNet, C3D) determine assigned
+malignancy labels through reading combined deep features
+(e.g., 64-D vectors) and Radiomics (e.g., V olume, Surface) and
+combine these into a Random Forest or SVM/NN ensemble
+to make determination of malignancy probability.
+V. METHODOLOGY
+The doctor uses a kind of scan called a V olumetric CT scan
+to look at lung nodules and figure out if they are bad or not.
+This scan uses a type of computer program called 3D CNN
+architectures to look at the picture not just a small part [1].
+This way it can see things that other methods might miss.
+To do this the doctor first gets the ready then finds the
+nodule or cuts it out. Next the computer looks really closely
+at the nodule. Tries to learn more about it. Finally the
+computer says if the nodule is benign or malignant [1] [2].
+The doctor uses a different ways to make sure they get it right
+like combining the computer program with other tools likeradiomics and biomarkers [15]. This helps the doctor make an
+accurate decision, about the V olumetric CT scan and the lung
+nodule.
+A. Data Preparation
+We use CT scans from datasets like LIDC-IDRI [6]. First
+we take these CT scans. Get them ready to use. We do this
+by cutting out the parts from the CT scans. These parts are
+the areas that’re important to us, which we call CT scans
+regions of interest. We usually find these CT scans regions
+of interest, around nodules. We look for CT scans regions of
+interest because they help us understand the CT scans better
+[6].
+We use cubes to do this. The cubes are usually 32x32x16
+(or) 16x16x16 voxels, in size [6]. We put the center of these
+cubes on the centers of the nodules that we know about. Then
+we add some space around the nodule. This extra space is
+usually twenty percent of the size of the nodule [6]. We do
+this with the cubes.
+Now we look at the values of the pixels in the CT scans. We
+change these values into something. We change these values
+into Hounsfield units [6]. Then we check the Hounsfield units
+to make sure they are just right. We do not want the Hounsfield
+units to be too high or too low. So we make sure the Hounsfield
+units are, between -800 and 200 Hounsfield units [6]. This way
+the Hounsfield units are good to use.
+We need to make these values normal. This is because the
+values have to be steady and okay for training. The values are
+made to be between -4 and 1 [6]. This is done to the CT scans
+from the LIDC datasets. Nodules that are 3mm or bigger are
+separated automatically. The ones that are not completely sure
+are left out so that we can say if they are benign or malignant.
+Sometimes we use a method called KNN to label them when
+we are not really sure so that we can use them for training
+too [3] [4].
+B. Detection Pipeline
+Detection uses a kind of screening that looks at entire
+CT volumes with something called 3D fully convolutional
+networks [1] [5]. This helps find areas that might be important
+which are called candidate ROIs. Then it uses another kind of
+network called discrimination CNNs to look closer at these
+areas called volumes of interest to make sure they are not
+positives.
+The detection also uses something called -scale 3D CNNs.
+These are like tools that can look at things from different
+distances like 20x20x6 (or) 30x30x10 (or) 40x40x26 [5]. This
+helps the detection understand what is going on around the
+areas. It is of like using a special pair of glasses that can see
+really far or really close.
+The detection also uses region proposal networks which’re
+like special maps that help find the exact location of the
+important areas, in the 3D scans [1] [10]. This helps the
+detection be very precise and find the spots [1] [10]. Detection
+uses these region proposal networks on the 3D scan patches
+to get a good idea of where things are.
+C. 3D CNN Architecture
+These networks have lots of layers with 3x3x3 convolutions
+[1] [8]. For example they start with 16 filters. Go all the way
+up to 512 filters. Networks feature ReLU [1]. Max-pooling
+with a size of 2x2x2 [1]. They also have connected layers
+with 1024, 64 and 2 neurons. Networks use dropout with a
+rate of 0.5 and L2 regularization to prevent overfitting [1] [8].
+When you put in volumes like 32x32x32 the Networks can
+learn everything they need to know from start to finish using
+stochastic gradient descent [1]. The momentum is 0.9 and the
+learning rate decays, over time [1]. This way Networks can get
+really good at what they do with AUCs between 0.73 and 0.80
+[1] [8]. Some versions of Networks are even better they add
+things like attention or ensembles to make them work better
+[8].
+Fig. 2. 3D CNN architecture layers with convolutional and pooling operations
+D. Classification and Fusion
+When we are trying to figure out if something’s malignant
+we can use a combination of things [2] [15]. We can use
+computers that look at 3D pictures and find deep features like
+really small details that are important. These computers can
+find things like 64- vectors from the layers that are close to
+the end [2] [15]. We can also use biomarkers which’re things
+like how subtle something is or how pointy it is. We can use
+radiomics [15], which is like measuring the volume or surface
+area or diameter of something [15].We can put all of these things together using something
+called forests and it actually works better than just using one
+of these things by itself. For example if we just use biomarkers
+we get a score of 0.94 [2] [15]. If we use the computers that
+look at 3D pictures and biomarkers together we get a score of
+0.76 [2].
+Fig. 3. Fusion of 3D CNN features with radiomics and biomarkers for
+malignancy classification
+We can also use these computers with models like SVM or
+NN and use features that we have carefully chosen. When we
+do this we can get better scores, like 0.78 to 0.80 by using
+a second stage of classifiers [2]. This means that malignancy
+classification, which is what we are trying to do can be more
+accurate when we use all of these things together. Malignancy
+classification is, about finding out if something is malignant
+and using all of these tools can help us do that.
+E. Evaluation Metrics
+Five-fold cross-validation on balanced datasets (e.g., 326
+pathologically confirmed nodules) reports ROC AUC (0.70-
+0.94), sensitivity (90%) [7], Dice (0.80 for segmentation), with
+DeLong tests for significance (p¡0.05) [7]. Semi-supervision
+via KNN on intermediates enhances training data [3] [7].
+VI. RESULT
+Doctors can now find lung problems easily with the help
+of computer programs. These computer programs look at
+CT scans in a way using something called three-dimensional
+convolutional neural networks or 3D CNNs [1] [2].
+The old way that doctors used to do things was to look at
+pictures one slice at a time.
+3D CNNs look at the lungs as a whole three-dimensional
+thing [1] [2].
+This means that 3D CNNs can see each spot in the lungs
+from angles.
+They can see the shape of the lung spot and the edges of
+the lung spot [1] [2].
+3D CNNs are really good, at finding lung problems because
+they look at the lung. What is inside the spot. The doctors can
+see what is going on with the lungs. Find problems accurately.
+Lung problems can be found with the help of these computer
+programs and 3D CNNs. This is really helpful for the doctors
+to understand what is going on with the lungs.
+The special computer programs and 3D CNNs are very
+good, at detecting lung problems.
+The 3D CNN systems can find lung nodules 90 percent to
+98 percent of the time [1] [2] [12].
+Fig. 4. Comparison of 2D vs 3D CNN performance in pulmonary nodule
+detection
+The 3D CNN systems can tell the difference between
+lung nodules that’re not harmful and lung nodules that are
+cancerous because the 3D CNN systems are able to look at
+lung nodules in a lot of detail [2] [12].
+The 3D CNN systems are good at finding lung nodules and
+the 3D CNN systems are good, at telling us if the lung nodules
+are bad or not.
+The 3D CNN systems work in a way that’s similar to how
+doctors look at pictures from CT scans. Doctors use these
+pictures to see what is going on inside the body
+When doctors combine their medical expertise with these AI
+tools, diagnoses become even more reliable [2] [14]. The col-
+laboration between humans and machines enables faster and
+more confident decisions about whether a nodule is malignant
+or benign [2] [14]. Overall, 3D CNN–based volumetric CT
+analysis represents a major advancement in computer-aided
+diagnostics, improving early lung cancer detection, patient
+outcomes, and the efficiency of radiology workflows [1] [2]
+[14].
+Fig. 5. Clinical workflow integration of 3D CNN-based pulmonary nodule
+analysisVII. DISCUSSION
+The V olumetric CT scan analysis is really good at helping us
+understand what is going on inside the body especially in the
+lungs when we use it with something called three-dimensional
+convolutional neural networks or 3D CNNs for short [1] [2]
+[14]. These 3D CNNs are better than the way of doing things
+with two-dimensional models that only looked at one picture
+of a CT scan at a time.
+The 3D CNNs look at the lung volume, in three dimensions,
+which is a big improvement [1] [8] [14].
+This means the V olumetric CT scan analysis and the 3D
+CNNs can see everything that is happening in the lungs [1] [8]
+[14]. This helps doctors get a good look at lung nodules. They
+can see the shape of lung nodules the texture of lung nodules
+and what’s inside lung nodules. This is important because it
+helps doctors find problems, like lung cancer. Doctors can find
+lung cancer when it is still early which is really good. Lung
+cancer is a deal so finding lung nodules and understanding
+what they are is crucial for doctors to detect lung cancer [1]
+[8] [14].
+3D convolutional neural networks are really good at finding
+lung tumors. Figuring out if they are bad or not [1] [2] [8].
+These computer models can look at pictures from sets like
+LIDC-IDRI and get it right most of the time.
+Because 3D convolutional neural networks can learn from
+a lot of CT pictures they can find patterns and problems on
+their own with little help from people [2] [6].
+This means there are mistakes and doctors can focus on the
+important pictures instead of looking at every single one by
+hand [2] [6]. Three dimensional convolutional neural networks
+are very helpful, in this way.
+In care using 3D CNN analysis along with what doctors
+know and other health signs makes a very good system
+for figuring out what is wrong with someone [1] [2] [14].
+The computer programs give results that’re not biased and
+are based on the numbers and doctors add their medical
+knowledge to make sure the diagnosis is correct and to make
+it more precise [2] [14]. Overall, volumetric CT with 3D
+CNNs represents a major advancement in medical imaging,
+improving both the quality of diagnosis and patient outcomes
+in lung disease management [1] [2] [8] [14].
+VIII. EXPECTEDOUTCOMES
+•Detection performance
+•Classification accuracy
+•Clinical impact
+•End-to-End Diagnosis
+•Superior 3D context
+IX. CONCLUSION
+The paper presented a conceptual design for a better CT
+scan by using the 3D CNN [1]. 3D CNN architectures are
+really good at analyzing volumetric CT scans to find nodules
+and figure out if they are bad or not. They do this by using
+the 3D spatial context [1] [?]. This means they are better than
+2D methods and a lot of other systems that came before them
+Fig. 6. 3D visualization of pulmonary nodules detected by the proposed
+system
+[1] [8] [14]. 3D CNN architectures can look at things in a
+way that’s more like how we see the world, which helps them
+make better decisions, about pulmonary nodules.
+These systems are really good at finding things [1] [8] [14].
+They can detect things correctly about 94.77 percent of the
+time [12]. Sometimes they make mistakes. Say something is
+there when it is not [12]. This happens about 30.39 times
+per scan when they are looking for candidates [12]. They
+get a little better at not making mistakes. Only do it about
+1.789 times per scan when they are trying to reduce false
+positives [12]. Overall these systems can detect things about
+89.29 percent of the time [12].
+The systems also do well in competition. They get a score
+of 0.8135 on the competition performance metrics [12]. This
+is better than methods, like ensemble methods that get a score
+of 0.722 [12].
+Fig. 7. Performance metrics comparison of proposed 3D CNN system with
+existing methodsThese models help doctors find lung cancer by looking at
+low dose CT scans for lumps [1], which makes the doctors job
+easier and reduces mistakes [1] [13] [14]. They follow rules
+like the ones from the Fleischner Society [13]. They can even
+find very small lumps that are less, than 3 millimeters big,
+which is really good because they can find almost all of them
+about 93 percent of the time so doctors can keep an eye on
+them [13].
+REFERENCES
+[1] 3D deep learning for detecting pulmonary nodules in CT scans - PMC
+[2] Timely Detection of Lung Nodule Malignancy Using 3D Convolutional
+Neural Networks
+[3] Lung Nodule Classification Using Biomarkers, V olumetric Radiomics,
+and 3D CNNs - PMC
+[4] 3D multi-view convolutional neural networks for lung nodule classifi-
+cation — PLOS One
+[5] Deep Learning in CT Images: Automated Pulmonary Nodule Detection
+[6] Pulmonary nodule classification in lung cancer screening with three-
+dimensional convolutional neural networks - PMC
+[7] 3D CNN with Visual Insights for Early Detection of Lung Cancer Using
+Gradient-Weighted Class Activation - Neal Joshua - 2021 - Journal of
+Healthcare Engineering - Wiley Online Library
+[8] Effective lung nodule detection using deep CNN with dual attention
+mechanisms — Scientific Reports
+[9] Automatic lung nodule detection using a 3D deep convolutional neural
+network combined with a multi-scale prediction strategy in chest CTs -
+ScienceDirect
+[10] Large residual multiple view 3D CNN for false positive reduction in
+pulmonary nodule detection — IEEE Conference Publication
+[11] Classification of lung cancer computed tomography images using a 3-
+dimensional deep convolutional neural network with multi-layer filter
+[12] DeepLung: 3D Deep Convolutional Nets for Automated Pulmonary
+Nodule Detection and Classification — bioRxiv
+[13] A novel benign and malignant classification model for lung nodules
+based on multi-scale interleaved fusion integrated network — Scientific
+Reports
+[14] Deep learning for the detection of benign and malignant pulmonary
+nodules in non-screening chest CT scans — Communications Medicine
+[15] Automatic detection of pulmonary nodules on CT images with YOLOv3:
+development and evaluation using simulated and patient data
