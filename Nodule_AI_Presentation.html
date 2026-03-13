@@ -375,73 +375,37 @@
             </div>
         </div>
 
-        <!-- Slide 2: Abstract -->
+                <!-- Slide 2 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">1. Functional <span>Requirements</span></h2>
+                <h2 class="slide-title">System <span>Requirements</span></h2>
                 <span class="slide-number">02</span>
             </div>
             <div class="content-body" style="font-size: 3.8rem; line-height: 1.6;">
-                <p>This project introduces an end-to-end web-based application designed for the automated detection and
-                    malignancy classification of pulmonary lung nodules from 3D CT scans. Driven by a highly optimized,
-                    CPU-efficient <strong>Lightweight 3D U-Net Architecture</strong>, it addresses the massive
-                    computational bottlenecks of traditional volumetric analysis while completely eliminating the need
-                    for expensive hospital GPUs.</p>
-                <p>By integrating a Next.js responsive frontend with a PyTorch backend and real-time WebGL rendering,
-                    the system empowers clinicians to instantly visualize critical spatial relationships in 3D,
-                    accelerating life-saving diagnostic workflows.</p>
+                <p><strong>1. Functional Requirements:</strong><br>The system must provide an accurate, reliable interface with real-time 3D volumetric rendering, automated inference execution, and classification categorization for efficient lung nodule management.</p>
+                <p><strong>2. User Requirements:</strong><br>The system must be highly user-friendly for radiologists, accessible from any modern web browser without any local graphics hardware dependencies.</p>
+                <p><strong>3. Non-Functional Requirements:</strong><br>The system must ensure high speed accuracy, robust data security (stateless inference), and scalability to handle increased scan volumes without lag.</p>
             </div>
         </div>
 
         <!-- Slide 3 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">2. User <span>Requirements</span></h2>
+                <h2 class="slide-title">Modules <span>Overview</span></h2>
                 <span class="slide-number">03</span>
-            </div>
-            <div class="content-body">
-                <ul>
-                    <li><strong>The Global Challenge:</strong> Lung cancer causes millions of deaths annually; early
-                        detection of pulmonary nodules is the absolute key to survival.</li>
-                    <li><strong>Current Bottleneck:</strong> Manual inspection of massive 3D CT scans slice-by-slice is
-                        slow, highly repetitive, and inherently prone to human fatigue.</li>
-                    <li><strong>Diagnostic Delays:</strong> Overwhelmed radiology departments face severe backlogs,
-                        meaning critical tumors can grow before a scan is ever reviewed.</li>
-                    <li><strong>High Inter-Observer Variability:</strong> Different doctors often interpret complex,
-                        irregular borders differently, leading to inconsistent biopsy decisions.</li>
-                    <li><strong>Our Solution:</strong> An automated, deeply-integrated AI diagnostic assistant for
-                        real-time, highly accurate nodule detection and classification directly inside a web browser.
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">3. Non Functional <span>Requirements</span></h2>
-                <span class="slide-number">04</span>
             </div>
             <div class="content-grid">
                 <div class="glass-card">
-                    <h3>Model Bias</h3>
-                    <p>Extreme class imbalance in medical data (millions of healthy voxels vs. few tumor voxels) causes
-                        severe false-benign predictions.</p>
+                    <h3>Frontend Visualization</h3>
+                    <p>React, Next.js, and WebGL Three.js render authentic 3D data directly in the browser.</p>
                 </div>
                 <div class="glass-card">
-                    <h3>Hardware Exhaustion</h3>
-                    <p>Full 3D isotropic volumes crash standard clinical workstations. Heavy convolutions demand
-                        non-existent local VRAM.</p>
+                    <h3>Backend Inference Gateway</h3>
+                    <p>Stateless Flask server normalizing volumetric patches instantly for mathematical processing.</p>
                 </div>
                 <div class="glass-card">
-                    <h3>Data Overhead</h3>
-                    <p>Legacy datasets like LUNA-21 require massive, brittle local preprocessing pipelines just to
-                        extract regions of interest.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>The "Black Box"</h3>
-                    <p>Traditional AI outputs a single number and lacks visually intuitive, explainable interfaces that
-                        a doctor can actually trust.</p>
+                    <h3>Deep Learning Engine</h3>
+                    <p>Lightweight U-Net 3D PyTorch model evaluating structure in milliseconds on the CPU.</p>
                 </div>
             </div>
         </div>
@@ -449,52 +413,10 @@
         <!-- Slide 4 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Modules <span>Overview</span></h2>
-                <span class="slide-number">05</span>
-            </div>
-            <div class="content-body">
-                <ul>
-                    <li><strong>Traditional CAD Systems:</strong> Rely completely on hand-crafted features (gradients,
-                        shapes). This leads to brittle generalization on new scanner data and high false-positive biopsy
-                        rates.</li>
-                    <li><strong>Heavyweight 3D CNNs (V-Net, Standard 3D U-Net):</strong> Produce great metrics but
-                        demand 24GB+ VRAM enterprise GPUs, making local hospital deployment financially and technically
-                        unscalable.</li>
-                    <li><strong>Manual Radiology Review:</strong> 2D planar viewing on traditional software misses the
-                        holistic 3D contextual relationships and margins of the tumor entirely.</li>
-                </ul>
-
-            </div>
-        </div>
-
-        <!-- Slide Extra UML 1 -->
-        <div class="slide">
-            <div class="slide-header">
                 <h2 class="slide-title">Data Collection and <span>Preprocessing</span></h2>
-                <span class="slide-number">06</span>
+                <span class="slide-number">04</span>
             </div>
-            <div style="display: flex; flex-direction: column; height: 100%; gap: 40px;">
-                <div class="media-container"
-                    style="flex: 1; max-height: 85%; width: 100%; border: 6px dashed var(--accent-green); padding: 40px; background: white;">
-                    <img src="Project SS/UML-1.png" alt="Architecture UML Diagram 1"
-                        style="object-fit: contain; width: 100%; height: 100%; box-shadow: none; background: transparent;">
-                </div>
-                <div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
-                    <p style="margin: 0; text-align: center;"><strong>The End-to-End System Flow:</strong> Illustrates
-                        the complete data lifecycle—from raw volumetric 3D file ingestion by the Next.js client, routed
-                        via the stateless REST gateway, and evaluated by the Lightning PyTorch backend to output
-                        real-time clinical probability metrics directly to the browser UI.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Feasibility <span>Study</span></h2>
-                <span class="slide-number">07</span>
-            </div>
-            <div class="content-body">
+<div class="content-body">
                 <ul>
                     <li><strong>Strategic Dataset Migration:</strong> Transitioned the entire pipeline to the LUNA-22
                         (ISMI) 3D Patches dataset. Pre-extracted regions completely eliminate class imbalance.</li>
@@ -509,24 +431,49 @@
             </div>
         </div>
 
-        <!-- Slide Extra -->
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Feasibility <span>Study</span></h2>
+                <span class="slide-number">05</span>
+            </div>
+<div class="content-grid">
+                <div class="glass-card">
+                    <h3>Technical Feasibility</h3>
+                    <p>Leverages bullet-proof modern open-source stacks. Crucially, the ultra-light graph guarantees it
+                        will run effortlessly on aging hospital IT equipment.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Operational Feasibility</h3>
+                    <p>Deploys as a standard secure web URL. Requires precisely zero local software, plugins, or driver
+                        installations by the clinical staff.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Economic Feasibility</h3>
+                    <p>Model training was entirely subsidized by free Kaggle Cloud instances. Local CPU inference costs
+                        $0. Resulting in massive long-term hospital workflow savings.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Process Model Used <span>Incremental Model</span></h2>
-                <span class="slide-number">08</span>
+                <span class="slide-number">06</span>
             </div>
-            <div style="display: flex; flex-direction: column; height: 100%; gap: 40px;">
-                <div class="media-container"
-                    style="flex: 1; max-height: 85%; width: 100%; border: 6px dashed var(--accent-green); padding: 40px; background: white;">
-                    <img src="Project SS/UML-2.png" alt="Architecture UML Diagram 2"
-                        style="object-fit: contain; width: 100%; height: 100%; box-shadow: none;">
+            <div class="content-grid">
+                <div class="glass-card" style="grid-column: span 2;">
+                    <h3>Incremental Model</h3>
+                    <p>Ideal for phased healthcare development where critical AI features are progressively integrated, tested, and validated.</p>
                 </div>
-                <div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
-                    <p style="margin: 0; text-align: center;"><strong>The Model Mathematical Sequence:</strong>
-                        Demonstrates the optimized volumetric pathway where localized regions undergo depthwise
-                        separable convolutions. The symmetric 3D U-Net's contracting and expanding structures
-                        aggressively preserve spatial detail, generating both the discrete spatial segmentation mask and
-                        the malignancy classification output simultaneously.</p>
+                <div>
+                    <ul>
+                        <li><strong>Phase 1:</strong> Volumetric preprocessing implementation</li>
+                        <li><strong>Phase 2:</strong> 3D U-Net construction and Kaggle compression training</li>
+                        <li><strong>Phase 3:</strong> Next.js WebGL and interactive UI synchronization</li>
+                        <li><strong>Phase 4:</strong> Final validation, edge-case tuning, deploy</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -535,46 +482,35 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">System <span>Architecture</span></h2>
-                <span class="slide-number">09</span>
+                <span class="slide-number">07</span>
             </div>
-            <div class="content-grid">
-                <div class="glass-card">
-                    <h3>Speed & Accuracy</h3>
-                    <p>Millisecond inference for classification. Zero waiting time for the physician.</p>
+<div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
+                    <p style="margin: 0; text-align: center;"><strong>The End-to-End System Flow:</strong> Illustrates
+                        the complete data lifecycle—from raw volumetric 3D file ingestion by the Next.js client, routed
+                        via the stateless REST gateway, and evaluated by the Lightning PyTorch backend to output
+                        real-time clinical probability metrics directly to the browser UI.</p>
                 </div>
-                <div class="glass-card">
-                    <h3>Edge-Compute Ready</h3>
-                    <p>Runs seamlessly on standard consumer CPUs. No cloud GPU API fees required for inference.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Visual Authenticity</h3>
-                    <p>Features a custom-engineered CT-authentic interactive 3D WebGL interface directly rendering in
-                        the browser.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Actionable Insights</h3>
-                    <p>Generates rich clinical text detailing estimated dimensions, margin texture, and official
-                        recommended actions.</p>
-                </div>
-            </div>
         </div>
 
         <!-- Slide 8 -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Activity <span>Diagram</span></h2>
-                <span class="slide-number">10</span>
+                <span class="slide-number">08</span>
             </div>
-            <div class="content-body">
-                <ul>
-                    <li><strong>Client UI (Next.js & Tailwind CSS):</strong> Delivers a highly responsive, modern,
-                        dark-mode/hospital-light hybrid experience with zero layout shift.</li>
-                    <li><strong>3D WebGL Engine (Three.js & React-Three-Fiber):</strong> Procedural rendering and
-                        dynamic lighting algorithms run securely in the client's browser.</li>
-                    <li><strong>API Gateway (Flask):</strong> A stateless REST API securely handling voxel intensity
-                        normalization preprocessing and extremely fast inference routing.</li>
-                    <li><strong>Deep Learning Engine (PyTorch):</strong> Executes the rapid CPU/GPU forward-passes on
-                        the optimized graph.</li>
+            <div class="content-body" style="font-size: 3.8rem;">
+                <p>An activity diagram mapping the workflow of detecting lung nodules using patch-based volumes.</p>
+                <ul style="margin-top: 30px;">
+                    <li><strong>Start:</strong> Physician activates the browser interface.</li>
+                    <li><strong>Upload Scan:</strong> Dropping `.npy` data into the localized Next.js dropzone.</li>
+                    <li><strong>Analyze Volume:</strong> The Flask API pre-processes Hounsfield units and invokes CPU inference.</li>
+                    <li><strong>Malignancy Detected?:</strong> Evaluates the spatial outputs against threshold bounds.
+                        <ul style="margin-top:20px">
+                            <li><strong>If Yes (>50%):</strong> Visually alert physician; prompt PET-CT/biopsy review.</li>
+                            <li><strong>If No (<25%):</strong> Log routine clean scan.</li>
+                        </ul>
+                    </li>
+                    <li><strong>End:</strong> Interactive 3D review tools remain unlocked for manual audit.</li>
                 </ul>
             </div>
         </div>
@@ -583,40 +519,28 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Sequence <span>Diagram</span></h2>
-                <span class="slide-number">11</span>
+                <span class="slide-number">09</span>
             </div>
-            <div class="content-body">
-                <ul>
-                    <li><strong>The Foundation:</strong> The U-Net architecture perfectly concatenates deep semantic
-                        (meaning) features with shallow spatial (location) features via skip connections.</li>
-                    <li><strong>The Weight Problem:</strong> Standard 3D convolutions require a catastrophic amount of
-                        FLOPs, completely halting edge devices.</li>
-                    <li><strong>Our Innovation:</strong> Implemented <strong>Depthwise Separable 3D
-                            Convolutions</strong>—splitting the calculation into spatial filtering and 1x1x1 pointwise
-                        feature combination.</li>
-                    <li><strong>The Result:</strong> Semantic volumetric segmentation achieved with only <strong>154,812
-                            parameters</strong>.</li>
-                </ul>
-            </div>
+<div class="content-body" style="flex: none; height: auto; padding: 40px 60px; font-size: 4rem;">
+                    <p style="margin: 0; text-align: center;"><strong>The Model Mathematical Sequence:</strong>
+                        Demonstrates the optimized volumetric pathway where localized regions undergo depthwise
+                        separable convolutions. The symmetric 3D U-Net's contracting and expanding structures
+                        aggressively preserve spatial detail, generating both the discrete spatial segmentation mask and
+                        the malignancy classification output simultaneously.</p>
+                </div>
         </div>
 
         <!-- Slide 10 -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">ER <span>Diagram</span></h2>
-                <span class="slide-number">12</span>
+                <span class="slide-number">10</span>
             </div>
-            <div class="content-body">
-                <ul>
-                    <li><strong>Loss Function:</strong> Implemented a Combined Loss mechanism summing BCEWithLogitsLoss
-                        + Soft Dice Loss to suppress false positives dynamically.</li>
-                    <li><strong>Optimizer:</strong> AdamW combined with a Cosine Annealing Learning Rate Scheduler for
-                        smooth convergence over 50 epochs.</li>
-                    <li><strong>The Bias Trick:</strong> The final classification layer bias was initialized heavily
-                        negative (-5.0) to prevent early training explosive gradients caused by benign-heavy data.</li>
-                    <li><strong>Hardware Acceleration:</strong> Utilized Automated Mixed Precision (AMP - fp16) on
-                        Kaggle Cloud GPUs to halve memory consumption during training.</li>
-                </ul>
+            <div class="content-body" style="font-size: 4.0rem; justify-content: center; align-items: center; text-align: center;">
+                <p>The operational data entity relationships bridge the localized web-client instance to memory structures. Rather than a distinct database, temporary file structures are mapped into Tensor objects inside isolated memory contexts linked strictly to session IDs, ensuring complete patient data privacy simultaneously while calculating geometry variables.</p>
+                <div style="margin-top: 60px; padding: 40px; border: 4px dashed #4CAF50; border-radius: 20px;">
+                    Client Session [1] <---> [1] Memory Tensor (Volume) <---> [1] Graph Output (Prediction)
+                </div>
             </div>
         </div>
 
@@ -624,9 +548,9 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Development <span>Phase</span></h2>
-                <span class="slide-number">13</span>
+                <span class="slide-number">11</span>
             </div>
-            <div class="content-grid">
+<div class="content-grid">
                 <div>
                     <ul>
                         <li><strong>Design Philosophy:</strong> A beautifully clean hospital-aesthetic perfectly
@@ -646,83 +570,55 @@
         <!-- Slide 12 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Object Detection <span>Model</span></h2>
-                <span class="slide-number">14</span>
+                <h2 class="slide-title">3D Convolutional <span>Model</span></h2>
+                <span class="slide-number">12</span>
             </div>
-            <div class="content-grid">
-                <div class="media-container">
-                    <img src="Project SS/2.png" alt="Sidebar Navigation Screenshot">
-                </div>
-                <div>
-                    <ul>
-                        <li><strong>Persistent Sidebar:</strong> Instant switching between Overview, Analyze,
-                            Performance, and Info views.</li>
-                        <li><strong>Fluid Transitions:</strong> Specialized Tailwind <code>transition-colors</code>
-                            algorithms strictly prevent layout UI flashing.</li>
-                        <li><strong>Prefetching:</strong> Next.js inherently enables instantaneous loading of all
-                            sub-routes.</li>
-                        <li><strong>Real-Time Status:</strong> Incorporates a live pulsing "System Online" intelligence
-                            indicator.</li>
-                    </ul>
-                </div>
+<div class="content-body">
+                <ul>
+                    <li><strong>The Foundation:</strong> The U-Net architecture perfectly concatenates deep semantic
+                        (meaning) features with shallow spatial (location) features via skip connections.</li>
+                    <li><strong>The Weight Problem:</strong> Standard 3D convolutions require a catastrophic amount of
+                        FLOPs, completely halting edge devices.</li>
+                    <li><strong>Our Innovation:</strong> Implemented <strong>Depthwise Separable 3D
+                            Convolutions</strong>—splitting the calculation into spatial filtering and 1x1x1 pointwise
+                        feature combination.</li>
+                    <li><strong>The Result:</strong> Semantic volumetric segmentation achieved with only <strong>154,812
+                            parameters</strong>.</li>
+                </ul>
             </div>
         </div>
 
         <!-- Slide 13 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">How YOLO <span>Works?</span></h2>
-                <span class="slide-number">15</span>
+                <h2 class="slide-title">How 3D U-Net <span>Works?</span></h2>
+                <span class="slide-number">13</span>
             </div>
-            <div class="content-grid">
-                <div>
-                    <ul>
-                        <li><strong>Interactive Dropzone:</strong> Wide-target drag-and-drop support strictly validating
-                            for raw 3D volumetric `.npy` patches.</li>
-                        <li><strong>Processing Feedback:</strong> Engages indeterminate progress bars to assure the user
-                            during the PyTorch inference.</li>
-                        <li><strong>The Analytics Panel:</strong> Right-hand column populates instantly with probability
-                            scores and AI-reasoned clinical descriptions.</li>
-                    </ul>
-                </div>
-                <div class="media-container">
-                    <img src="Project SS/3.png" alt="Analyze File Dropzone">
-                </div>
+            <div class="content-body" style="font-size: 3.8rem;">
+                <p>The symmetric U-Net divides the 3D grid into distinct semantic contracting and expanding branches. It predicts voxel geometries, confidence probabilities, and margins. Depthwise separable convolutions divide the calculations into spatial channels, slashing hardware dependencies.</p>
+                <p>By heavily utilizing Skip Connections, spatial edges are perfectly preserved resulting in high-detail anatomical reproduction without immense VRAM limits.</p>
             </div>
         </div>
 
         <!-- Slide 14 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Implementation of YOLO in the <span>Project</span></h2>
-                <span class="slide-number">16</span>
+                <h2 class="slide-title">Implementation of 3D U-Net in the <span>Project</span></h2>
+                <span class="slide-number">14</span>
             </div>
-            <div class="content-grid">
-                <div class="media-container">
-                    <img src="Project SS/4.png" alt="WebGL Engineering Model">
-                </div>
-                <div>
-                    <ul>
-                        <li><strong>The Engine:</strong> Leverages React-Three-Fiber to draw high-performance graphical
-                            pipelines directly onto an HTML Canvas using the GPU.</li>
-                        <li><strong>Procedural Geometry:</strong> Parametric mathematical functions generate dynamic,
-                            organic lung lobes on the fly without loading heavy initial 3D files.</li>
-                        <li><strong>Anatomical Accuracy:</strong> Precisely calculates a tapered apex, flat wide base,
-                            and inner mediastinal concavity.</li>
-                        <li><strong>Material Rendering:</strong> Mimics translucent soft human tissue via complex
-                            metallic/roughness node logic.</li>
-                    </ul>
-                </div>
+            <div class="content-body" style="font-size: 3.8rem;">
+                <p>This project implants the compressed 3D U-Net specifically for instantaneous inference localized entirely on consumer CPUs. The pipeline receives 64x64x32 patches representing complex anatomy from LUNA-22.</p>
+                <p>Generating spatial outputs simultaneously with probability logic means a physician dynamically maps both the shape of the tumor boundary and the numeric urgency instantaneously.</p>
             </div>
         </div>
 
         <!-- Slide 15 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Speed Estimation and <span>Tracking</span></h2>
-                <span class="slide-number">17</span>
+                <h2 class="slide-title">Volumetric Visualization and <span>Analysis</span></h2>
+                <span class="slide-number">15</span>
             </div>
-            <div class="content-grid">
+<div class="content-grid">
                 <div>
                     <ul>
                         <li><strong>CT Aesthetic:</strong> Uses a 75% opaque ghostly gray-white parenchyma to perfectly
@@ -744,97 +640,10 @@
         <!-- Slide 16 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">License Plate Recognition and <span>OCR</span></h2>
-                <span class="slide-number">18</span>
+                <h2 class="slide-title">Malignancy Classification and <span>Probability Logic</span></h2>
+                <span class="slide-number">16</span>
             </div>
-            <div class="content-grid">
-                <div class="media-container">
-                    <img src="Project SS/6.png" alt="Performance Metrics Analytics">
-                </div>
-                <div>
-                    <ul>
-                        <li><strong>Live Metrics:</strong> Clean CSS data-grid layouts flawlessly showcasing F1-Score,
-                            Overall Accuracy, Precision, and Recall variables.</li>
-                        <li><strong>Statistical Breakdown:</strong> Detailed numerical Confusion Matrix explicitly
-                            highlighting the structurally low false-negative rate required for oncology.</li>
-                        <li><strong>Hardware Efficiency:</strong> Visually reinforcing the ultra-low compute overhead
-                            (~0.6MB parameter weight envelope).</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 17 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Performance Metrics in <span>Detection</span></h2>
-                <span class="slide-number">19</span>
-            </div>
-            <div class="content-grid">
-                <div>
-                    <ul>
-                        <li><strong>Deep Diving:</strong> Secondary dashboard panes allow physicians to view precise
-                            thresholds.</li>
-                        <li><strong>Visual Confirmations:</strong> Displays granular loss curves and validation matrices
-                            right inside the app.</li>
-                        <li><strong>Transparent Metrics:</strong> Openly provides the dataset testing conditions.</li>
-                    </ul>
-                </div>
-                <div class="media-container">
-                    <img src="Project SS/8.png" alt="Advanced Model Analytics">
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 18 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Advantages of the <span>System</span></h2>
-                <span class="slide-number">20</span>
-            </div>
-            <div class="content-grid">
-                <div class="media-container">
-                    <img src="Project SS/9.png" alt="Information Documentation Page">
-                </div>
-                <div>
-                    <ul>
-                        <li><strong>Documentation Hub:</strong> An integrated, elegant Markdown-based Info page
-                            providing in-app access to architecture structural shifts.</li>
-                        <li><strong>Algorithmic Explainability:</strong> Directly educates curious clinical users on why
-                            Depthwise Separable layers and Bias Tricks were utilized.</li>
-                        <li><strong>Team 14 Manifest:</strong> Official project origins, academic affiliations, and
-                            version control status transparently listed for audit.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 21 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Applications of the <span>System</span></h2>
-                <span class="slide-number">21</span>
-            </div>
-            <div class="content-body">
-                <ul>
-                    <li><strong>Robust Preprocessing (`preprocess_npy`):</strong> Automates strict voxel intensity
-                        normalization to map all raw Hounsfield units to the absolute [0, 1] range expected by the AI.
-                    </li>
-                    <li><strong>Bridging the Stack:</strong> A lightning-fast, stateless Flask app serves as the exact
-                        pipeline connecting the React client uploads to the deep PyTorch mathematics.</li>
-                    <li><strong>Lightning Inference:</strong> Runs a `torch.no_grad()` forward pass entirely localized
-                        on the core CPU, completing in extreme milliseconds for instantaneous UI injection.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 21 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Expected <span>Results</span></h2>
-                <span class="slide-number">22</span>
-            </div>
-            <div class="content-grid">
+<div class="content-grid">
                 <div class="glass-card">
                     <h3 class="highlight-danger">> 75% Probability</h3>
                     <p>System automatically warns of irregular spiculated margins and officially recommends immediate
@@ -860,38 +669,90 @@
             </div>
         </div>
 
-        <!-- Slide 21 -->
+        <!-- Slide 17 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title"><span>Conclusion</span></h2>
-                <span class="slide-number">23</span>
+                <h2 class="slide-title">Performance Metrics in <span>Malignancy Detection</span></h2>
+                <span class="slide-number">17</span>
             </div>
-            <div class="content-grid">
-                <div class="glass-card">
-                    <h3>Technical Feasibility</h3>
-                    <p>Leverages bullet-proof modern open-source stacks. Crucially, the ultra-light graph guarantees it
-                        will run effortlessly on aging hospital IT equipment.</p>
+<div class="content-grid">
+                <div class="media-container">
+                    <img src="Project SS/6.png" alt="Performance Metrics Analytics">
                 </div>
-                <div class="glass-card">
-                    <h3>Operational Feasibility</h3>
-                    <p>Deploys as a standard secure web URL. Requires precisely zero local software, plugins, or driver
-                        installations by the clinical staff.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Economic Feasibility</h3>
-                    <p>Model training was entirely subsidized by free Kaggle Cloud instances. Local CPU inference costs
-                        $0. Resulting in massive long-term hospital workflow savings.</p>
+                <div>
+                    <ul>
+                        <li><strong>Live Metrics:</strong> Clean CSS data-grid layouts flawlessly showcasing F1-Score,
+                            Overall Accuracy, Precision, and Recall variables.</li>
+                        <li><strong>Statistical Breakdown:</strong> Detailed numerical Confusion Matrix explicitly
+                            highlighting the structurally low false-negative rate required for oncology.</li>
+                        <li><strong>Hardware Efficiency:</strong> Visually reinforcing the ultra-low compute overhead
+                            (~0.6MB parameter weight envelope).</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 21 -->
+        <!-- Slide 18 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title"><span>References</span></h2>
-                <span class="slide-number">24</span>
+                <h2 class="slide-title">Advantages of the <span>System</span></h2>
+                <span class="slide-number">18</span>
+            </div>
+<div class="content-grid">
+                <div class="glass-card">
+                    <h3>Speed & Accuracy</h3>
+                    <p>Millisecond inference for classification. Zero waiting time for the physician.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Edge-Compute Ready</h3>
+                    <p>Runs seamlessly on standard consumer CPUs. No cloud GPU API fees required for inference.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Visual Authenticity</h3>
+                    <p>Features a custom-engineered CT-authentic interactive 3D WebGL interface directly rendering in
+                        the browser.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Actionable Insights</h3>
+                    <p>Generates rich clinical text detailing estimated dimensions, margin texture, and official
+                        recommended actions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Applications of the <span>System</span></h2>
+                <span class="slide-number">19</span>
             </div>
             <div class="content-grid">
+                <div class="glass-card">
+                    <h3>Smart Hospitals</h3>
+                    <p>Integrated radiological management systems for high-pressure trauma triage.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Remote Diagnostics</h3>
+                    <p>Real-time edge compute deployments in underfunded clinics completely lacking GPU infrastructure.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Oncology Screening</h3>
+                    <p>Dedicated rapid volume screening evaluating longitudinal growth rates.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Medical Education</h3>
+                    <p>Serving as an accurate 3D spatial visual teaching tool for incoming students.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Expected <span>Results</span></h2>
+                <span class="slide-number">20</span>
+            </div>
+<div class="content-grid">
                 <div class="glass-card">
                     <h3>Faster Triaging</h3>
                     <p>Yields an estimated 30-40% faster turnaround time (TAT) on routine scanning queues.</p>
@@ -914,13 +775,13 @@
             </div>
         </div>
 
-        <!-- Slide Final -->
+        <!-- Slide 21 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Q&A <span>Session</span></h2>
-                <span class="slide-number">25</span>
+                <h2 class="slide-title"> <span>Conclusion</span></h2>
+                <span class="slide-number">21</span>
             </div>
-            <div class="content-body" style="padding: 100px; justify-content: center;">
+<div class="content-body" style="padding: 100px; justify-content: center;">
                 <h3
                     style="font-size: 6rem; color: var(--accent-green); margin-bottom: 80px; text-align: center; margin-top: 0;">
                     Nodule AI Project Conclusion</h3>
@@ -943,5 +804,4 @@
 
     </div>
 </body>
-
 </html>
