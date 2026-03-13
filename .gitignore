@@ -47,7 +47,10 @@ temp/
 # LUNA16 data (large files)
 luna/
 data/LUNA16/
-data/Dataset/
+# data/Dataset/
+data/Dataset/*
+!data/Dataset/test/
+!data/Dataset/test_samples/
 *.mhd
 *.raw
 *.zraw
